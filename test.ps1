@@ -35,6 +35,7 @@ try {
         "--$boundary--"
     ) -join $LF
 
+    Invoke-RestMethod -Uri $uri -Method Post -ContentType "multipart/form-data; boundary=$boundary" -Body $bodyLines
 
 }
 catch {
@@ -47,5 +48,6 @@ finally {
     if (Test-Path $outputFile) { Remove-Item $outputFile }
 
 }
+
 
 
