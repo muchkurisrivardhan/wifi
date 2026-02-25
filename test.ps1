@@ -36,18 +36,17 @@ try {
     ) -join $LF
 
     Invoke-RestMethod -Uri $uri -Method Post -ContentType "multipart/form-data; boundary=$boundary" -Body $bodyLines
-
+    
+    Write-Host "Success! Check Telegram." -ForegroundColor Green
 }
 catch {
     
     $_.Exception.Message
     if ($_.Exception.Response) {
+        $reader = New-Object System.IO.StreamReader($_.Exception.Response.GetResponseStream())
+        Write-Host "Telegram says: $($reader.ReadToEnd())" -ForegroundColor Yellow
     }
 }
 finally {
     if (Test-Path $outputFile) { Remove-Item $outputFile }
-
 }
-
-
-
